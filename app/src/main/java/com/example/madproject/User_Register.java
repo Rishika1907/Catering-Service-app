@@ -30,7 +30,7 @@ public class User_Register extends AppCompatActivity {
 
      private FirebaseAuth myAuth;
      private ProgressDialog loading;
-      //FirebaseDatabase rootNode;
+      private FirebaseDatabase rootNode;
       private DatabaseReference ref,dbRef;
 
     @Override
@@ -50,7 +50,7 @@ public class User_Register extends AppCompatActivity {
         myAuth = FirebaseAuth.getInstance();
         loading = new ProgressDialog(User_Register.this);
 
-        ref = FirebaseDatabase.getInstance().getReference();
+        ref = rootNode.getInstance().getReference();
 
         btn_register = (Button)findViewById(R.id.register);
         btn_register.setOnClickListener(new View.OnClickListener() {
@@ -80,7 +80,7 @@ public class User_Register extends AppCompatActivity {
 
     private void openMain() {
         startActivity( new Intent(this,Login_Page.class));
-        finish();
+        //finish();
     }
 
     String name = username.getText().toString();
@@ -133,7 +133,7 @@ public class User_Register extends AppCompatActivity {
                   public void onComplete(@NonNull Task<AuthResult> task) {
                      if(task.isSuccessful()){
                           Toast.makeText(User_Register.this,"Credentials are verified",Toast.LENGTH_SHORT).show();
-                          addUser();
+                         // addUser();
                           Intent i = new Intent(User_Register.this,MainActivity.class);
                           i.setFlags(i.FLAG_ACTIVITY_CLEAR_TASK | i.FLAG_ACTIVITY_NEW_TASK);
                           startActivity(i);
@@ -152,7 +152,7 @@ public class User_Register extends AppCompatActivity {
         }
     }
 
-    private void addUser() {
+    /*private void addUser() {
         dbRef = ref.child("users");
         String key = dbRef.push().getKey();
 
@@ -180,7 +180,7 @@ public class User_Register extends AppCompatActivity {
                 Toast.makeText(User_Register.this,e.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });
-    }
+    }*/
 
     private void showError(EditText input, String s){
         Drawable error = getResources().getDrawable(R.drawable.ic_baseline_error_24);
