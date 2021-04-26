@@ -21,6 +21,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.HashMap;
+
 public class User_Register extends AppCompatActivity {
      private TextView btn;
      private EditText username,email,password,confirm_password,phone,address;
@@ -29,7 +31,7 @@ public class User_Register extends AppCompatActivity {
      private FirebaseAuth myAuth;
      private ProgressDialog loading;
       //FirebaseDatabase rootNode;
-      private DatabaseReference ref;
+      private DatabaseReference ref,dbRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,18 +79,20 @@ public class User_Register extends AppCompatActivity {
     }
 
     private void openMain() {
-        startActivity( new Intent(this,MainActivity.class));
+        startActivity( new Intent(this,Login_Page.class));
         finish();
     }
 
+    String name = username.getText().toString();
+    String emailId = email.getText().toString();
+    String phoneNo = phone.getText().toString();
+    String Address = address.getText().toString();
+    String conPwd = confirm_password.getText().toString();
+    String pwd = password.getText().toString();
+
     private void verifyCredentials() {
         Boolean err = false;
-        String name = username.getText().toString();
-        String emailId = email.getText().toString();
-        String phoneNo = phone.getText().toString();
-        String Address = address.getText().toString();
-        String conPwd = confirm_password.getText().toString();
-        String pwd = password.getText().toString();
+
 
         if (name.isEmpty()){
             showError(username,"Invalid username");
@@ -129,7 +133,7 @@ public class User_Register extends AppCompatActivity {
                   public void onComplete(@NonNull Task<AuthResult> task) {
                      if(task.isSuccessful()){
                           Toast.makeText(User_Register.this,"Credentials are verified",Toast.LENGTH_SHORT).show();
-                          //addUser();
+                          addUser();
                           Intent i = new Intent(User_Register.this,MainActivity.class);
                           i.setFlags(i.FLAG_ACTIVITY_CLEAR_TASK | i.FLAG_ACTIVITY_NEW_TASK);
                           startActivity(i);
@@ -148,7 +152,35 @@ public class User_Register extends AppCompatActivity {
         }
     }
 
+    private void addUser() {
+        dbRef = ref.child("users");
+        String key = dbRef.push().getKey();
 
+        HashMap<String , String> user  = new HashMap<>();
+        user.put("Key",key);
+        user.put("Username",name);
+        user.put("Phone",phoneNo);
+        user.put("Email",emailId);
+        user.put("Address",Address);
+        user.put("Password",pwd);
+
+        dbRef.child(key).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()){
+                      Toast.makeText(User_Register.this,"Registered Successfully",Toast.LENGTH_SHORT).show();
+                      openMain();
+                }else{
+                    Toast.makeText(User_Register.this, "Error : "+task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                Toast.makeText(User_Register.this,e.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
     private void showError(EditText input, String s){
         Drawable error = getResources().getDrawable(R.drawable.ic_baseline_error_24);
