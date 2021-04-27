@@ -20,13 +20,14 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.annotations.NotNull;
 
 import java.util.HashMap;
 
 public class User_Register extends AppCompatActivity {
-     private TextView btn;
-     private EditText username,email,password,confirm_password,phone,address;
-     private Button btn_register;
+      private TextView btn;
+      private EditText username,email,password,confirm_password,phone,address;
+      private Button btn_register;
 
      private FirebaseAuth myAuth;
      private ProgressDialog loading;
@@ -50,9 +51,10 @@ public class User_Register extends AppCompatActivity {
         myAuth = FirebaseAuth.getInstance();
         loading = new ProgressDialog(User_Register.this);
 
-        ref = rootNode.getInstance().getReference();
+        //ref = rootNode.getInstance().getReference();
 
         btn_register = (Button)findViewById(R.id.register);
+
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,17 +82,16 @@ public class User_Register extends AppCompatActivity {
 
     private void openMain() {
         startActivity( new Intent(this,Login_Page.class));
-        //finish();
+        finish();
     }
 
-    String name = username.getText().toString();
-    String emailId = email.getText().toString();
-    String phoneNo = phone.getText().toString();
-    String Address = address.getText().toString();
-    String conPwd = confirm_password.getText().toString();
-    String pwd = password.getText().toString();
-
     private void verifyCredentials() {
+        String name = username.getText().toString();
+        String emailId = email.getText().toString();
+        String phoneNo = phone.getText().toString();
+        String Address = address.getText().toString();
+        String conPwd = confirm_password.getText().toString();
+        String pwd = password.getText().toString();
         Boolean err = false;
 
 
@@ -133,7 +134,7 @@ public class User_Register extends AppCompatActivity {
                   public void onComplete(@NonNull Task<AuthResult> task) {
                      if(task.isSuccessful()){
                           Toast.makeText(User_Register.this,"Credentials are verified",Toast.LENGTH_SHORT).show();
-                         // addUser();
+                           addUser(name,phoneNo,emailId,pwd,Address);
                           Intent i = new Intent(User_Register.this,MainActivity.class);
                           i.setFlags(i.FLAG_ACTIVITY_CLEAR_TASK | i.FLAG_ACTIVITY_NEW_TASK);
                           startActivity(i);
@@ -147,12 +148,12 @@ public class User_Register extends AppCompatActivity {
                       Toast.makeText(User_Register.this,"Error : "+e.getMessage(),Toast.LENGTH_SHORT).show();
                   }
               });
-            //rootNode = FirebaseDatabase.getInstance();
-            //ref = rootNode.getReference("users");
+            rootNode = FirebaseDatabase.getInstance();
+            ref = rootNode.getReference("users");
         }
     }
 
-    /*private void addUser() {
+    private void addUser(String name,String phoneNo,String emailId,String pwd,String Address) {
         dbRef = ref.child("users");
         String key = dbRef.push().getKey();
 
@@ -180,7 +181,7 @@ public class User_Register extends AppCompatActivity {
                 Toast.makeText(User_Register.this,e.getMessage(),Toast.LENGTH_SHORT).show();
             }
         });
-    }*/
+    }
 
     private void showError(EditText input, String s){
         Drawable error = getResources().getDrawable(R.drawable.ic_baseline_error_24);
