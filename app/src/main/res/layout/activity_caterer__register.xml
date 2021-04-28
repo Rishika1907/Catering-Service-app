@@ -4,15 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/catererbackground"
     tools:context=".Caterer_Register">
+
+    <ImageView
+        android:layout_width="120dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="24dp"
+        android:layout_marginLeft="64dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:paddingLeft="10dp"
+        android:src="@drawable/images"
+        app:layout_constraintEnd_toStartOf="@+id/logo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <TextView
         android:id="@+id/logo"
-        android:layout_width="wrap_content"
+        android:layout_width="180dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginLeft="24dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
@@ -20,7 +35,6 @@
         android:text="Register"
         android:textColor="@android:color/black"
         android:textSize="40sp"
-        android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -38,6 +52,7 @@
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:background="@drawable/input_bg"
+        android:drawableLeft="@drawable/ic_baseline_person_24"
         android:ems="10"
         android:hint="Username"
         android:inputType="textPersonName"
@@ -49,7 +64,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logo"
-        tools:drawableLeft="@drawable/ic_baseline_person_24" />
+        />
 
     <EditText
         android:id="@+id/cPhoneno"
@@ -162,39 +177,39 @@
         app:layout_constraintTop_toBottomOf="@+id/cPassword" />
 
     <Button
-        android:id="@+id/cregister"
-        android:layout_width="301dp"
-        android:layout_height="58dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginLeft="32dp"
+        android:id="@+id/cRegister"
+        android:layout_width="290dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginLeft="64dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
-        android:paddingLeft="20dp"
-        android:paddingTop="15dp"
+        android:background="@drawable/button_bg"
+        android:fontFamily="sans-serif-medium"
+        android:paddingLeft="10dp"
+        android:paddingTop="20dp"
         android:paddingRight="10dp"
         android:paddingBottom="15dp"
         android:text="Register"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.425"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sevicename"
-        tools:background="@drawable/button_bg" />
+        app:layout_constraintTop_toBottomOf="@+id/sevicename" />
 
     <TextView
         android:id="@+id/alreadyhaveaccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="75dp"
-        android:layout_marginLeft="75dp"
+        android:layout_marginStart="65dp"
+        android:layout_marginLeft="65dp"
         android:layout_marginTop="13dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
-        android:text="Already have an account?Click here"
+        android:text="Already have an account? Click here"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.393"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cregister"
+        app:layout_constraintTop_toBottomOf="@+id/cRegister"
         tools:textColor="@color/black" />
 
     <EditText

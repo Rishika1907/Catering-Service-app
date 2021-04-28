@@ -65,20 +65,23 @@
 
     <Button
         android:id="@+id/lButton"
-        android:layout_width="match_parent"
+        android:layout_width="290dp"
         android:layout_height="wrap_content"
-        android:text="Login"
-        android:layout_marginHorizontal="20dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="15dp"
         android:layout_marginBottom="30dp"
-        android:background="@drawable/buttonbg"
-        android:paddingBottom="15dp"
+        android:background="@drawable/button_bg"
+        android:paddingLeft="10dp"
         android:paddingTop="15dp"
         android:paddingRight="10dp"
-        android:paddingLeft="10dp"
-        android:layout_marginTop="15dp"
-        />
+        android:paddingBottom="15dp"
+        android:text="Login"
+        android:textSize="20sp"
+        android:fontFamily="sans-serif-medium"/>
 
     <TextView
+        android:id="@+id/lDoNotHaveAccount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Don't have an account?Create here"

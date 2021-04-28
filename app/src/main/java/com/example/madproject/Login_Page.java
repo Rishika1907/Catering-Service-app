@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class Login_Page extends AppCompatActivity {
-   private TextView btn;
+   private TextView btn,btnBack;
 
     private Button btn_Login;
     @Override
@@ -18,6 +18,7 @@ public class Login_Page extends AppCompatActivity {
         setContentView(R.layout.activity_login__page);
 
         btn = (TextView)findViewById(R.id.forgotPassword);
+        btnBack = (TextView)findViewById(R.id.lDoNotHaveAccount);
 
         btn_Login = (Button)findViewById(R.id.lButton);
 
@@ -26,6 +27,14 @@ public class Login_Page extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Login_Page.this,ForgotPassword.class);
                 startActivity(intent);
+            }
+        });
+
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(Login_Page.this,User_Register.class);
+                startActivity(i);
             }
         });
         btn_Login.setOnClickListener(new View.OnClickListener() {
