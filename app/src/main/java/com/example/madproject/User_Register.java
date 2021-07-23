@@ -1,8 +1,5 @@
 package com.example.madproject;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -13,6 +10,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
@@ -20,27 +20,28 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.annotations.NotNull;
 
 import java.util.HashMap;
 
 public class User_Register extends AppCompatActivity {
-      private TextView btn;
-      private EditText username,email,password,confirm_password,phone,address;
-      private Button btn_register;
+    private TextView btn;
+    private EditText username,email,password,confirm_password,phone,address;
+    private Button btn_register;
 
-     private FirebaseAuth myAuth;
-     private ProgressDialog loading;
-      private FirebaseDatabase rootNode;
-      private DatabaseReference ref,dbRef;
+    private FirebaseAuth myAuth;
+    private ProgressDialog loading;
+    private FirebaseDatabase rootNode;
+    private DatabaseReference dbRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user__register);
 
+        // text view for already having an account
         btn = (TextView)findViewById(R.id.alreadyhaveaccount);
 
+        // intializing EditText
         username = (EditText)findViewById(R.id.username);
         email = (EditText)findViewById(R.id.emailId);
         password = (EditText)findViewById(R.id.Password);
@@ -51,7 +52,7 @@ public class User_Register extends AppCompatActivity {
         myAuth = FirebaseAuth.getInstance();
         loading = new ProgressDialog(User_Register.this);
 
-        //ref = rootNode.getInstance().getReference();
+
 
         btn_register = (Button)findViewById(R.id.register);
 
@@ -70,19 +71,6 @@ public class User_Register extends AppCompatActivity {
             }
         });
 
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        if(myAuth.getCurrentUser() != null){
-            openMain();
-        }
-    }
-
-    private void openMain() {
-        startActivity( new Intent(this,Login_Page.class));
-        finish();
     }
 
     private void verifyCredentials() {
@@ -124,37 +112,38 @@ public class User_Register extends AppCompatActivity {
             err = true;
         }
         if(err == false){
-              loading.setTitle("Verification");
-              loading.setMessage("Please wait,while verifying your credentials");
-              loading.setCanceledOnTouchOutside(false);
-              loading.show();
+            loading.setTitle("Verification");
+            loading.setMessage("Please wait");
+            loading.setCanceledOnTouchOutside(false);
+            loading.show();
 
-              myAuth.createUserWithEmailAndPassword(emailId,pwd).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                  @Override
-                  public void onComplete(@NonNull Task<AuthResult> task) {
-                     if(task.isSuccessful()){
-                          Toast.makeText(User_Register.this,"Credentials are verified",Toast.LENGTH_SHORT).show();
-                           addUser(name,phoneNo,emailId,pwd,Address);
-                          Intent i = new Intent(User_Register.this,MainActivity.class);
-                          i.setFlags(i.FLAG_ACTIVITY_CLEAR_TASK | i.FLAG_ACTIVITY_NEW_TASK);
-                          startActivity(i);
-                      }else {
-                         Toast.makeText(User_Register.this,"Error : "+task.getException().getMessage(),Toast.LENGTH_SHORT).show();
-                     }
-                  }
-              }).addOnFailureListener(new OnFailureListener() {
-                  @Override
-                  public void onFailure(@NonNull Exception e) {
-                      Toast.makeText(User_Register.this,"Error : "+e.getMessage(),Toast.LENGTH_SHORT).show();
-                  }
-              });
+            myAuth.createUserWithEmailAndPassword(emailId,pwd).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if(task.isSuccessful()){
+                        Toast.makeText(User_Register.this,"Credentials are verified",Toast.LENGTH_SHORT).show();
+                        addUser(name,phoneNo,emailId,pwd,Address);
+                        Intent i = new Intent(User_Register.this,MainActivity.class);
+                        i.setFlags(i.FLAG_ACTIVITY_CLEAR_TASK | i.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(i);
+                        loading.dismiss();
+                    }else {
+                        Toast.makeText(User_Register.this,"Error : "+task.getException().getMessage(),Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    loading.dismiss();
+                    Toast.makeText(User_Register.this,"Error : "+e.getMessage(),Toast.LENGTH_SHORT).show();
+                }
+            });
             rootNode = FirebaseDatabase.getInstance();
-            ref = rootNode.getReference("users");
+            dbRef = rootNode.getReference("users");
         }
     }
 
     private void addUser(String name,String phoneNo,String emailId,String pwd,String Address) {
-        dbRef = ref.child("users");
         String key = dbRef.push().getKey();
 
         HashMap<String , String> user  = new HashMap<>();
@@ -169,8 +158,8 @@ public class User_Register extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()){
-                      Toast.makeText(User_Register.this,"Registered Successfully",Toast.LENGTH_SHORT).show();
-                      openMain();
+                    Toast.makeText(User_Register.this,"Registered Successfully",Toast.LENGTH_SHORT).show();
+                    //openMain();
                 }else{
                     Toast.makeText(User_Register.this, "Error : "+task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                 }

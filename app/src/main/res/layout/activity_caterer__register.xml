@@ -57,6 +57,7 @@
         android:hint="Username"
         android:inputType="textPersonName"
         android:paddingLeft="20dp"
+
         android:paddingTop="10dp"
         android:paddingRight="10dp"
         android:paddingBottom="10dp"
@@ -197,7 +198,7 @@
         app:layout_constraintTop_toBottomOf="@+id/sevicename" />
 
     <TextView
-        android:id="@+id/alreadyhaveaccount"
+        android:id="@+id/calreadyhaveaccount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="65dp"

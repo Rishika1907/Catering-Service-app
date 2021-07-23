@@ -1,22 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.madproject" >
+    package="com.example.madproject">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
+        android:hardwareAccelerated="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.MAdProject" >
-        <activity android:name=".ForgotPassword" >
-        </activity>
+        android:theme="@style/Theme.MAdProject">
+        <activity android:name=".user_view_order"></activity>
+        <activity android:name=".Acceptorreject" />
+        <activity android:name=".Pendingvieworders" />
+        <activity android:name=".Profile_view" />
+        <activity android:name=".Viewdatafromdb" />
+        <activity android:name=".View_orders" />
+        <activity android:name=".DeleteItem" />
+        <activity android:name=".caterer_occasion" />
+        <activity android:name=".OcassionUnavailable" />
+        <activity android:name=".OrderSummary" />
+        <activity
+            android:name=".DisplayMenu"
+            android:windowSoftInputMode="adjustResize|adjustPan" />
+        <activity android:name=".Update_Itemlist" />
+        <activity android:name=".Additemtodb" />
+        <activity android:name=".ViewCaterer" />
+        <activity android:name=".NewActivity" />
+        <activity android:name=".SelectionPage" />
+        <activity android:name=".Adapter" />
+        <activity android:name=".occasion" />
+        <activity android:name=".ForgotPassword" />
         <activity android:name=".Caterer_Register" />
         <activity android:name=".Login_Page" />
         <activity android:name=".User_Register" />
-        <activity android:name=".MainActivity" >
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
