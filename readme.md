@@ -1,4 +1,4 @@
-<h1>About the Application</h>
+<h1>About the Application</h1>
 Catering service android application developed for digitizing the entire process of booking a caterer for an event. 
 With this application, the organizer of the event can book a caterer. 
 The caterer can view the orders and add items to the menu for each event.
