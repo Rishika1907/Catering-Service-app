@@ -17,5 +17,6 @@ The caterer can view the orders and add items to the menu for each event.
 ![image](https://user-images.githubusercontent.com/65275894/183592855-bf63c760-34d4-444e-9e41-7271496971c2.png)
 
 <h2>Screenshots of the application </h2>
+![Screenshot (454)](https://user-images.githubusercontent.com/65275894/183593805-aa97d8ea-be19-41cc-af1a-b4105504d77f.png)
 
 
