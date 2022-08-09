@@ -12,3 +12,7 @@ The android application is coded in Java using android studio IDE.
 The data is stored and retrieved from Firebase real-time database.
 </li>
 </ul>
+
+<h2>Use Case Diagram</h2>
+![image](https://user-images.githubusercontent.com/65275894/183592855-bf63c760-34d4-444e-9e41-7271496971c2.png)
+
